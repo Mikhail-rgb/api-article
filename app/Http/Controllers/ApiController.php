@@ -45,7 +45,7 @@ class ApiController extends Controller
         }
         return response()->json(
             [
-                'message' => 'can`t find any article'
+                'message' => 'can`t find any article in DB'
             ]
         );
     }
