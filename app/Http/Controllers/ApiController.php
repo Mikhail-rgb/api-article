@@ -43,6 +43,8 @@ class ApiController extends Controller
                 );
             }
         }
+
+
         return response()->json(
             [
                 'message' => 'can`t find any article in DB'
@@ -58,7 +60,7 @@ class ApiController extends Controller
             if($countOfArticles > $elemsPerPage)
             {
                 return response()->json(
-                    Article::where('title', $title)->paginate($elemsPerPage)
+                    Article::where('title', $title)->simplePaginate($elemsPerPage)
                 );
             } else {
                 return response()->json(
@@ -74,6 +76,58 @@ class ApiController extends Controller
                     $title
                 )
             ]
+        );
+    }
+
+    public function searchArticleByTags(Request $request): JsonResponse
+    {
+        $request->validate([
+            'tags' => 'required'
+        ]);
+
+        $requestedTags = $request->input('tags');
+
+        if(!$requestedTags)
+        {
+            return response()->json(
+                [
+                    'message' => 'expected field `tags` with array of tags'
+                ]
+            );
+        }
+
+        $articlesArray = [];
+        foreach($requestedTags as $requestedTag)
+        {
+            $tag = Tag::where('tag', $requestedTag)->first();
+            if($tag)
+            {
+                $articleIds = $tag->article_ids;
+                if($articleIds)
+                {
+                    foreach ($articleIds as $articleID)
+                    {
+                        $article = Article::find($articleID);
+                        if(!in_array($article, $articlesArray))
+                        {
+                            $articlesArray[] = $article;
+                        }
+                    }
+                }
+            }
+        }
+
+        if(!$articlesArray)
+        {
+            return response()->json(
+                [
+                    'message' => 'can`t find articles by requested tags'
+                ]
+            );
+        }
+
+        return response()->json(
+            $articlesArray
         );
     }
 
@@ -107,7 +161,7 @@ class ApiController extends Controller
                 if($countOfArticles > $elemsPerPage)
                 {
                     return response()->json(
-                        Article::where('title', $response[0]->title)->paginate($elemsPerPage)
+                        Article::where('title', $response[0]->title)->simplePaginate($elemsPerPage)
                     );
                 } else {
                     return response()->json(

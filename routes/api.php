@@ -26,6 +26,8 @@ Route::get('/articles/all/{perPage}', [ApiController::class, 'showAllArticles'])
 
 Route::get('/articles/search/title/{title}/{perPage}', [ApiController::class, 'searchArticleByTitle']);
 
+Route::get('/articles/search/tags', [ApiController::class, 'searchArticleByTags']);
+
 Route::put('/articles/update/title/{title}/{perPage}', [ApiController::class, 'updateArticleByTitle']);
 
 Route::delete('/articles/delete/title/{title}', [ApiController::class, 'deleteArticleByTitle']);
