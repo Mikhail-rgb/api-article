@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 
@@ -30,10 +31,8 @@ class ApiController extends Controller
     {
         $amountOfArticles = Article::count();
 
-        if($amountOfArticles)
-        {
-            if($amountOfArticles > $elemsPerPage)
-            {
+        if ($amountOfArticles) {
+            if ($amountOfArticles > $elemsPerPage) {
                 return response()->json(
                     Article::simplePaginate($elemsPerPage)
                 );
@@ -57,8 +56,7 @@ class ApiController extends Controller
         $countOfArticles = Article::where('title', $title)->count();
 
         if ($countOfArticles) {
-            if($countOfArticles > $elemsPerPage)
-            {
+            if ($countOfArticles > $elemsPerPage) {
                 return response()->json(
                     Article::where('title', $title)->simplePaginate($elemsPerPage)
                 );
@@ -87,8 +85,7 @@ class ApiController extends Controller
 
         $requestedTags = $request->input('tags');
 
-        if(!$requestedTags)
-        {
+        if (!$requestedTags) {
             return response()->json(
                 [
                     'message' => 'expected field `tags` with array of tags'
@@ -97,19 +94,14 @@ class ApiController extends Controller
         }
 
         $articlesArray = [];
-        foreach($requestedTags as $requestedTag)
-        {
+        foreach ($requestedTags as $requestedTag) {
             $tag = Tag::where('tag', $requestedTag)->first();
-            if($tag)
-            {
+            if ($tag) {
                 $articleIds = $tag->article_ids;
-                if($articleIds)
-                {
-                    foreach ($articleIds as $articleID)
-                    {
+                if ($articleIds) {
+                    foreach ($articleIds as $articleID) {
                         $article = Article::find($articleID);
-                        if(!in_array($article, $articlesArray))
-                        {
+                        if (!in_array($article, $articlesArray)) {
                             $articlesArray[] = $article;
                         }
                     }
@@ -117,8 +109,7 @@ class ApiController extends Controller
             }
         }
 
-        if(!$articlesArray)
-        {
+        if (!$articlesArray) {
             return response()->json(
                 [
                     'message' => 'can`t find articles by requested tags'
@@ -140,26 +131,22 @@ class ApiController extends Controller
                 $articles = Article::where('title', $title)->get();
                 $response = [];
                 foreach ($articles as $article) {
-                    if($request->input('title'))
-                    {
+                    if ($request->input('title')) {
                         $article->title = $request->input('title');
                     }
 
-                    if($request->input('content'))
-                    {
+                    if ($request->input('content')) {
                         $article->content = $request->input('content');
                     }
 
-                    if($request->input('tags'))
-                    {
+                    if ($request->input('tags')) {
                         $article = ApiController::tagsProcessing($request->input('tags'), $article->id);
                     }
                     $article->save();
                     $response[] = $article;
                 }
 
-                if($countOfArticles > $elemsPerPage)
-                {
+                if ($countOfArticles > $elemsPerPage) {
                     return response()->json(
                         Article::where('title', $response[0]->title)->simplePaginate($elemsPerPage)
                     );
@@ -197,8 +184,7 @@ class ApiController extends Controller
             foreach ($articles as $article) {
                 $articleID = $article->id;
                 $tagIdsArr = $article->tag_ids;
-                foreach($tagIdsArr as $tagID)
-                {
+                foreach ($tagIdsArr as $tagID) {
                     $tagIDInt = (int)$tagID;
                     ApiController::deleteArticleIDFromTagsTable($articleID, $tagIDInt);
                 }
@@ -240,8 +226,7 @@ class ApiController extends Controller
             if ($existedTag) {
 
                 $articleIDsArr = $existedTag->article_ids;
-                if(!$articleIDsArr)
-                {
+                if (!$articleIDsArr) {
                     $articleIDsArr = [];
                 }
                 if (!in_array($articleID, $articleIDsArr)) {
@@ -272,15 +257,12 @@ class ApiController extends Controller
         // so we need to find tags that the article won`t use anymore and delete `id` of this article for this tags
         // in `Tags` table.
         $oldTagIds = $article->tag_ids;
-        if(!$oldTagIds)
-        {
+        if (!$oldTagIds) {
             $oldTagIds = [];
         }
         $diffTagIds = array_diff($oldTagIds, $newTagIds);
-        if($diffTagIds)
-        {
-            foreach($diffTagIds as $tagID)
-            {
+        if ($diffTagIds) {
+            foreach ($diffTagIds as $tagID) {
                 ApiController::deleteArticleIDFromTagsTable($articleID, $tagID);
             }
         }
@@ -288,8 +270,7 @@ class ApiController extends Controller
         //In some situations $newTagIds is json, not array.
         //So I have to use construction below for saving array in DB, not json.
         $tempArray = [];
-        foreach ($newTagIds as $value)
-        {
+        foreach ($newTagIds as $value) {
             $tempArray[] = $value;
         }
 
@@ -304,10 +285,8 @@ class ApiController extends Controller
         $tag = Tag::find($tagID);
         $articleIdsArr = $tag->article_ids;
         $withoutDeletedID = [];
-        foreach ($articleIdsArr as $articleId)
-        {
-            if($delArticleID !== (int)$articleId)
-            {
+        foreach ($articleIdsArr as $articleId) {
+            if ($delArticleID !== (int)$articleId) {
                 $withoutDeletedID[] = $articleId;
             }
         }

@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\Article;
@@ -18,17 +19,14 @@ class TagsController extends Controller
     public function deleteAllTags(): JsonResponse
     {
         $tags = Tag::get();
-        if($tags)
-        {
-            foreach($tags as $tag)
-            {
+        if ($tags) {
+            foreach ($tags as $tag) {
                 $tag->delete();
             }
 
             $articles = Article::get();
 
-            foreach($articles as $article)
-            {
+            foreach ($articles as $article) {
                 $article->tag_ids = [];
                 $article->save();
             }
@@ -47,12 +45,11 @@ class TagsController extends Controller
         );
     }
 
-    public function searchTagById($id):JsonResponse
+    public function searchTagById($id): JsonResponse
     {
         $tag = Tag::find($id);
 
-        if($tag)
-        {
+        if ($tag) {
             return response()->json(
                 $tag
             );
@@ -68,12 +65,11 @@ class TagsController extends Controller
         );
     }
 
-    public function searchTagByTag($requestedTag):JsonResponse
+    public function searchTagByTag($requestedTag): JsonResponse
     {
         $tag = Tag::where('tag', $requestedTag)->first();
 
-        if($tag)
-        {
+        if ($tag) {
             return response()->json(
                 $tag
             );
