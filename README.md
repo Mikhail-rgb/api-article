@@ -1,74 +1,481 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# api-article
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Данный проект является решением тестовго задания:
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and
-creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in
-many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache)
-  storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Создать REST апи по редактированию статей на laravel:
 
-## Learning Laravel
+Сделать 4 метода:
+1.	Список
+2.	Создание
+3.	Редактирование
+4.	Удаление
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all
-modern web application frameworks, making it a breeze to get started with the framework.
+У каждой статьи следующие параметра:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video
-tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging
-into our comprehensive video library.
+1.	Название
+2.	Текст
+3.	Теги
 
-## Laravel Sponsors
+Теги должны быть уникальными в бд и хранится отдельно, при списке/создании/редактировании передаваться названия а не ид, названия сравниваются без учета регистра.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in
-becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Для создания программы использовался следующий инструментарий:
+- Laravel Framework 8.55.0;
+- язык программирования PHP 7.4.3;
+- СУБД MySQL.
 
-### Premium Partners
+**Все запросы и отеты в формате JSON.**
+___
+## Создание статьи 
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
+/api/articles
 
-## Contributing
+Этот запрос создает новую статью в таблице базы данных.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in
-the [Laravel documentation](https://laravel.com/docs/contributions).
+Адрес для отправки запроса:
+http://127.0.0.1:8000/api/articles
 
-## Code of Conduct
+Метод запроса: POST.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by
-the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Параметры запроса:
+**ДОДЕЛАЙ!!!!!!!**
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell
-via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Параметры ответа:
+**ДОДЕЛАЙ!!!!!!!**
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+Пример запроса:
+
+```json
+{
+    "title":"ОСАГО-2021: для водителей ввели важные изменения",
+    "content": "Подробности о новвоведениях в работе и возможностях полисов ОСАГО раскрыли Autonews.ru в Центробанке. Соответствующие нормативные акты ЦБ вступили в силу 29 августа. Одним из важных изменений стало снятие запрета на вступление в силу электронного договора ОСАГО в день его заключения. До этого момента страховые компании не имели права заключать договоры Е-ОСАГО, который начинал бы действовать ранее, чем через 72 часа после оформления. Ранее указания ЦБ предусматривали обязательное наличие такой отсрочки. Если если это требование нарушалось, страховщиков наказывали. Такой подход в ЦБ объясняли необходимостью защиты от мошенников и случаев, когда водители без ОСАГО могли устроить аварию и оформить документ сразу после ДТП. А вот добросовестные водители оставались без возможности быстро застраховаться. Теперь же у каждого страховщика есть возможность устанавливать актуальные на их взгляд сроки.",
+    "tags": [
+        "авто",
+        "осаго",
+        "автомобили",
+        "пдд"
+    ]
+}
+```
+
+Пример успешного ответа:
+```json
+{
+    "id": 1
+}
+```
+Пример неуспешного ответа:
+
+```json
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "title": [
+            "The title field is required."
+        ]
+    }
+}
+```
+
+
+___
+## Получение списка статей
+
+/api/articles/all/{perPage?}
+
+Этот запрос выводит информацию о всех имеющихся в базе статьях.
+
+С целью снижения нагрузки на сервис был предусмотрен метод вывода списка статей по частям (пагинация). В запросе можно указать количество статей на странице (по умолчанию количество статей на странице 5).
+
+Адрес для отправки запроса о выводе каталога товаров:
+http://127.0.0.1:8000/api/articles/all/2
+
+Метод запроса: GET.
+
+Параметры ответа:
+**ДОДЕЛАЙ!!!!!!!**
+
+
+Пример успешного ответа:
+
+```json
+{
+    "current_page": 1,
+    "data": [
+        {
+            "id": 1,
+            "title": "ОСАГО-2021: для водителей ввели важные изменения",
+            "content": "Подробности о новвоведениях в работе и возможностях полисов ОСАГО раскрыли Autonews.ru в Центробанке. Соответствующие нормативные акты ЦБ вступили в силу 29 августа. Одним из важных изменений стало снятие запрета на вступление в силу электронного договора ОСАГО в день его заключения. До этого момента страховые компании не имели права заключать договоры Е-ОСАГО, который начинал бы действовать ранее, чем через 72 часа после оформления. Ранее указания ЦБ предусматривали обязательное наличие такой отсрочки. Если если это требование нарушалось, страховщиков наказывали. Такой подход в ЦБ объясняли необходимостью защиты от мошенников и случаев, когда водители без ОСАГО могли устроить аварию и оформить документ сразу после ДТП. А вот добросовестные водители оставались без возможности быстро застраховаться. Теперь же у каждого страховщика есть возможность устанавливать актуальные на их взгляд сроки.",
+            "tag_ids": [
+                1,
+                2,
+                3,
+                4
+            ]
+        },
+        {
+            "id": 2,
+            "title": "Штрафы за музыку и неправильный свет. В ГИБДД все объяснили",
+            "content": "В каких случаях водителям грозят штрафы за дополнительное аудио- и светооборудование подробно объяснили в Госавтоинспекции. Поводом для обращения Autonews.ru в ведомство стал рейд воронежской ГИБДД в начале августа. Тогда к административной ответственности за внесение изменений в конструкцию автомобилей за два дня привлекли 148 водителей. В их числе оказались собственники, которые установили на свои автомобили усилители звука, дополнительные колонки и сабвуферы. Штрафы также выписали и за неправильный цвет дополнительных ламп внутри головного освещения.",
+            "tag_ids": [
+                1,
+                5,
+                3,
+                4,
+                6
+            ]
+        }
+    ],
+    "first_page_url": "http://127.0.0.1:8000/api/articles/all/2?page=1",
+    "from": 1,
+    "next_page_url": "http://127.0.0.1:8000/api/articles/all/2?page=2",
+    "path": "http://127.0.0.1:8000/api/articles/all/2",
+    "per_page": 2,
+    "prev_page_url": null,
+    "to": 2
+}
+```
+
+
+Пример неуспешного ответа:
+```json
+{
+    "message": "can`t find any article in DB"
+}
+```
+
+___
+## Получение списка тегов
+
+/api/tags/all/{perPage?}
+
+Этот запрос выводит информацию о всех имеющихся в базе тегах.
+
+С целью снижения нагрузки на сервис был предусмотрен метод вывода списка тегов по частям (пагинация). В запросе можно указать количество статей на странице (по умолчанию количество тегов на странице 10).
+
+Адрес для отправки запроса о выводе каталога товаров:
+http://127.0.0.1:8000/api/tags/all/20
+
+Метод запроса: GET.
+
+Параметры ответа:
+**ДОДЕЛАЙ!!!!!!!**
+
+
+Пример успешного ответа:
+```json
+[
+    {
+        "id": 1,
+        "tag": "авто",
+        "article_ids": [
+            1,
+            2
+        ]
+    },
+    {
+        "id": 2,
+        "tag": "осаго",
+        "article_ids": [
+            1
+        ]
+    },
+    {
+        "id": 3,
+        "tag": "автомобили",
+        "article_ids": [
+            1,
+            2
+        ]
+    },
+    {
+        "id": 4,
+        "tag": "пдд",
+        "article_ids": [
+            1,
+            2
+        ]
+    },
+    {
+        "id": 5,
+        "tag": "штрафы",
+        "article_ids": [
+            2
+        ]
+    },
+    {
+        "id": 6,
+        "tag": "гибдд",
+        "article_ids": [
+            2
+        ]
+    },
+    {
+        "id": 7,
+        "tag": "футбол",
+        "article_ids": [
+            3
+        ]
+    },
+    {
+        "id": 8,
+        "tag": "спорт",
+        "article_ids": [
+            3
+        ]
+    },
+    {
+        "id": 9,
+        "tag": "новости",
+        "article_ids": [
+            3
+        ]
+    },
+    {
+        "id": 10,
+        "tag": "психология",
+        "article_ids": [
+            4
+        ]
+    },
+    {
+        "id": 11,
+        "tag": "самолеты",
+        "article_ids": [
+            4
+        ]
+    },
+    {
+        "id": 12,
+        "tag": "медицина",
+        "article_ids": [
+            4
+        ]
+    },
+    {
+        "id": 13,
+        "tag": "советы",
+        "article_ids": [
+            4
+        ]
+    }
+]
+```
+
+Также предусмотрены запросы для вывода информации о теге по его id (/api/tags/id/{id}) и значению поля "tag" (/api/tags/tag/{tag}).
+
+___
+## Поиск статьи (по названию)
+
+/api/articles/search/title/{title}/{perPage?}
+
+Этот запрос выводит статьи с соответствующем названием в запросе.
+
+С целью снижения нагрузки на сервис был предусмотрен метод вывода списка статей по частям (пагинация). В запросе можно указать количество статей на странице (по умолчанию количество статей на странице 5).
+
+Адрес для отправки запроса:
+http://127.0.0.1:8000/api/articles/search/title/Боюсь летать: как справиться с аэрофобией
+
+Метод запроса: GET.
+
+Параметры ответа:
+**ДОДЕЛАЙ!!!!!!!**
+
+
+Пример успешного ответа:
+
+```json
+[
+    {
+        "id": 4,
+        "title": "Боюсь летать: как справиться с аэрофобией",
+        "content": "Аэрофобия может возникнуть безо всякой причины, а может стать результатом пережитого стресса, например, если вы стали свидетелем какой-то катастрофы. Страх сам по себе — естественная реакция организма, которая помогает нам вести себя так, как требуют обстоятельства. Мы привыкаем к базовому страху и практически не ощущаем его. Жить с ним помогает целый набор защитных механизмов.Но если в механизмах происходит сбой, появляются тревожные расстройства, навязчивые мысли, фобии, то есть страх, в котором полностью отсутствует здравый смысл.",
+        "tag_ids": [
+            10,
+            11,
+            12,
+            13
+        ]
+    }
+]
+```
+
+
+Пример неуспешного ответа:
+
+```json
+{
+    "message": "cant`t find any article with a title `Звездные войны`"
+}
+```
+
+___
+## Поиск статьи (по тегам)
+
+/api/articles/search/tags
+
+Этот запрос выводит статьи с соответствующими тегами в теле запроса.
+
+Адрес для отправки запроса:
+http://127.0.0.1:8000/api/articles/search/tags
+
+Метод запроса: GET.
+
+Параметры ответа:
+**ДОДЕЛАЙ!!!!!!!**
+
+Пример запроса:
+
+```json
+{
+    "tags": [
+        "спорт",
+        "психология"
+    ]
+}
+```
+
+
+Пример успешного ответа:
+
+```json
+[
+    {
+        "id": 3,
+        "title": "Возвращение Роналду создаст кучу проблем «МЮ». И только сам Криштиану способен решить их",
+        "content": "Криштиану Роналду в свои 36 лет все еще в космических кондициях и до сих пор в числе лучших голеадоров планеты. В минувшем сезоне CR7 стал лучшим бомбардиром серии А (29 голов) и Евро-2020 (5 забитых мячей). А с момента ухода из «Манчестер Юнайтед» в 2009 году статистика Криштиану ни разу не опускалась ниже 0,5 гола за матч. Очевидно, возвращение в «МЮ» — последний этап его карьеры. Теперь миссия португальца — вернуть «Юнайтед» на трон спустя девять лет после последнего чемпионства в АПЛ и побороться за шестой кубок Лиги чемпионов. Удастся или нет — во многом зависит от самого Криштиану. Разберем авантюру имени Роналду с тактической точки зрения.",
+        "tag_ids": [
+            7,
+            8,
+            9
+        ]
+    },
+    {
+        "id": 4,
+        "title": "Боюсь летать: как справиться с аэрофобией",
+        "content": "Аэрофобия может возникнуть безо всякой причины, а может стать результатом пережитого стресса, например, если вы стали свидетелем какой-то катастрофы. Страх сам по себе — естественная реакция организма, которая помогает нам вести себя так, как требуют обстоятельства. Мы привыкаем к базовому страху и практически не ощущаем его. Жить с ним помогает целый набор защитных механизмов.Но если в механизмах происходит сбой, появляются тревожные расстройства, навязчивые мысли, фобии, то есть страх, в котором полностью отсутствует здравый смысл.",
+        "tag_ids": [
+            10,
+            11,
+            12,
+            13
+        ]
+    }
+]
+```
+
+
+Пример неуспешного ответа:
+
+```json
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "tags": [
+            "The tags field is required."
+        ]
+    }
+}
+```
+
+___
+## Редактирование статьи 
+
+/api/articles/update/title/{title}/{perPage?}
+
+Этот запрос обновляет статьи в таблице базы данных. Статья определяется по названию.
+
+Для обновления можно указать лишь те параметры, которые нужно обновить.
+
+С целью снижения нагрузки на сервис был предусмотрен метод вывода списка статей по частям (пагинация). В запросе можно указать количество статей на странице (по умолчанию количество статей на странице 5).
+
+Адрес для отправки запроса:
+http://127.0.0.1:8000/api/articles/update/title/Штрафы за музыку и неправильный свет. В ГИБДД все объяснили
+
+
+Метод запроса: PUT.
+
+Параметры запроса:
+**ДОДЕЛАЙ!!!!!!!**
+
+
+Параметры ответа:
+**ДОДЕЛАЙ!!!!!!!**
+
+
+Пример запроса:
+
+```json
+{
+    "title": "Штрафы за музыку и неправильный свет"
+}
+```
+
+
+Пример успешного ответа:
+
+```json
+[
+    {
+        "id": 2,
+        "title": "Штрафы за музыку и неправильный свет",
+        "content": "В каких случаях водителям грозят штрафы за дополнительное аудио- и светооборудование подробно объяснили в Госавтоинспекции. Поводом для обращения Autonews.ru в ведомство стал рейд воронежской ГИБДД в начале августа. Тогда к административной ответственности за внесение изменений в конструкцию автомобилей за два дня привлекли 148 водителей. В их числе оказались собственники, которые установили на свои автомобили усилители звука, дополнительные колонки и сабвуферы. Штрафы также выписали и за неправильный цвет дополнительных ламп внутри головного освещения.",
+        "tag_ids": [
+            1,
+            5,
+            3,
+            4,
+            6
+        ]
+    }
+]
+```
+
+
+Пример неуспешного ответа:
+
+```json
+{
+    "message": "cant`t find any article with a title `Надувные шары в Абхазии`"
+}
+```
+
+___
+## Удаление товара
+
+/api/articles/delete/title/{title}
+
+Этот запрос удаляет статьи из таблицы базы данных в соответствии с указаным в запросе названием. 
+
+Адрес для отправки запроса:
+http://127.0.0.1:8000/api/articles/delete/title/Возвращение Роналду создаст кучу проблем «МЮ». И только сам Криштиану способен решить их
+
+Метод запроса: DELETE.
+
+Параметры ответа:
+**ДОДЕЛАЙ!!!!!!!**
+
+
+Пример успешного ответа:
+
+```json
+{
+    "message": "article(s) with a title `Возвращение Роналду создаст кучу проблем «МЮ». И только сам Криштиану способен решить их` deleted"
+}
+```
+
+
+Пример неуспешного ответа:
+
+```json
+{
+    "message": "cant`t find any article with a title `Лучшие бары Перми`"
+}
+```
