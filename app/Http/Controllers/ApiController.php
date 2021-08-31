@@ -27,7 +27,7 @@ class ApiController extends Controller
         ]);
     }
 
-    public function showAllArticles(int $elemsPerPage): JsonResponse
+    public function showAllArticles(int $elemsPerPage = 5): JsonResponse
     {
         $amountOfArticles = Article::count();
 
@@ -51,7 +51,7 @@ class ApiController extends Controller
         );
     }
 
-    public function searchArticleByTitle(string $title, int $elemsPerPage): JsonResponse
+    public function searchArticleByTitle(string $title, int $elemsPerPage = 5): JsonResponse
     {
         $countOfArticles = Article::where('title', $title)->count();
 
@@ -122,7 +122,7 @@ class ApiController extends Controller
         );
     }
 
-    public function updateArticleByTitle(Request $request, string $title, int $elemsPerPage): JsonResponse
+    public function updateArticleByTitle(Request $request, string $title, int $elemsPerPage = 5): JsonResponse
     {
         if ($request) {
             $countOfArticles = Article::where('title', $title)->count();

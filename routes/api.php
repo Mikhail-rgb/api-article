@@ -22,18 +22,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/articles', [ApiController::class, 'createArticle']);
 
-Route::get('/articles/all/{perPage}', [ApiController::class, 'showAllArticles']);
+Route::get('/articles/all/{perPage?}', [ApiController::class, 'showAllArticles']);
 
-Route::get('/articles/search/title/{title}/{perPage}', [ApiController::class, 'searchArticleByTitle']);
+Route::get('/articles/search/title/{title}/{perPage?}', [ApiController::class, 'searchArticleByTitle']);
 
 Route::get('/articles/search/tags', [ApiController::class, 'searchArticleByTags']);
 
-Route::put('/articles/update/title/{title}/{perPage}', [ApiController::class, 'updateArticleByTitle']);
+Route::put('/articles/update/title/{title}/{perPage?}', [ApiController::class, 'updateArticleByTitle']);
 
 Route::delete('/articles/delete/title/{title}', [ApiController::class, 'deleteArticleByTitle']);
 
 
-Route::get('tags/all/{perPage}', [TagsController::class, 'showAllTags']);
+Route::get('tags/all/{perPage?}', [TagsController::class, 'showAllTags']);
 
 Route::delete('tags/delete/all', [TagsController::class, 'deleteAllTags']);
 

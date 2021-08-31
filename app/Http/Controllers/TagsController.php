@@ -9,11 +9,30 @@ use Illuminate\Http\JsonResponse;
 
 class TagsController extends Controller
 {
-    public function showAllTags(int $elemsPerPage): JsonResponse
+    public function showAllTags(int $elemsPerPage = 10): JsonResponse
     {
-        return response()->json(
-            Tag::simplePaginate($elemsPerPage)
-        );
+        $amountOfTags = Tag::count();
+
+        if(!$amountOfTags)
+        {
+            return response()->json(
+                [
+                    'message' => 'can`t find any tags in DB'
+                ]
+            );
+        }
+
+        if($amountOfTags > $elemsPerPage)
+        {
+            return response()->json(
+                Tag::simplePaginate($elemsPerPage)
+            );
+        } else {
+            return response()->json(
+                Tag::get()
+            );
+        }
+
     }
 
     public function deleteAllTags(): JsonResponse
